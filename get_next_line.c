@@ -6,11 +6,11 @@
 /*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 01:26:16 by abouafso          #+#    #+#             */
-/*   Updated: 2023/12/23 05:19:21 by abouafso         ###   ########.fr       */
+/*   Updated: 2023/12/23 23:18:55 by abouafso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <get_next_line.h>
+#include "get_next_line.h"
 
 char	*ft_join_and_free(char *buffer, char *buf)
 {
@@ -45,4 +45,32 @@ char	*read_file(int fd, char *result)
 	}
 	free(buffer);
 	return (result);
+}
+
+char	*copy_line(char *buffer)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	while (buffer[i] || buffer[i] != '\n')
+		i++;
+	if (buffer[i] || buffer[i] == '\n')
+		i++;
+	line = malloc(i + 1);
+	if (!line)
+		return (free(buffer), free(line), NULL);
+	line[i] = '\0';
+	i = 0;
+	while (buffer[i] || buffer != '\n')
+	{
+		line[i] = buffer[i];
+		i++;
+	}
+	if (buffer[i] || buffer[i] == '\n')
+	{
+		i++;
+		line[i] = '\n';
+	}
+	return (line);
 }
