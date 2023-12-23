@@ -1,0 +1,83 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/23 01:25:36 by abouafso          #+#    #+#             */
+/*   Updated: 2023/12/23 01:42:19 by abouafso         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "get_next_line.h"
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strrchr(const char *str, int c)
+{
+	int	index;
+
+	index = ft_strlen(str) + 1;
+	while (index > 0)
+	{
+		index--;
+		if ((char)str[index] == (char)c)
+			return ((char *)str + index);
+	}
+	return (NULL);
+}
+
+void	*ft_calloc(size_t num_elements, size_t element_size)
+{
+	unsigned char	*str;
+	size_t			i;
+
+	i = 0;
+	str = malloc(num_elements * element_size);
+	if (!str)
+		return (NULL);
+	while (i < num_elements * element_size)
+	{
+		str[i] = 0;
+		i++;
+	}
+	return (str);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	i;
+	size_t	lenght;
+	char	*new;
+	size_t	j;
+
+	if (!s1 || !s2)
+		return (NULL);
+	lenght = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
+	new = malloc(lenght);
+	if (!new)
+		return (NULL);
+	j = 0;
+	i = 0;
+	while (s1[i])
+	{
+		new[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		new[i + j] = s2[j];
+		j++;
+	}
+	new[i + j] = '\0';
+	return (new);
+}
