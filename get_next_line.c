@@ -6,7 +6,7 @@
 /*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 01:26:16 by abouafso          #+#    #+#             */
-/*   Updated: 2023/12/23 23:18:55 by abouafso         ###   ########.fr       */
+/*   Updated: 2023/12/25 05:11:28 by abouafso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,32 @@ char	*copy_line(char *buffer)
 		line[i] = '\n';
 	}
 	return (line);
+}
+
+char	*remove_first_line(char *buffer)
+{
+	char	*new_buff;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (buffer[i] || buffer[i] != '\n')
+		i++;
+	if (!buffer[i])
+	{
+		free (buffer);
+		return (NULL);
+	}
+	new_buff = ft_calloc((ft_strlen(buffer) - i + 1), 1);
+	if (!new_buff)
+		return (free(buffer), free(new_buff), NULL);
+	while (buffer[i])
+	{
+		new_buff[j] = buffer[i];
+		j++;
+		i++;
+	}
+	free (buffer);
+	return (new_buff);
 }
