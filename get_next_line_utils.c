@@ -6,7 +6,7 @@
 /*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 01:25:36 by abouafso          #+#    #+#             */
-/*   Updated: 2023/12/26 04:25:06 by abouafso         ###   ########.fr       */
+/*   Updated: 2023/12/29 03:39:47 by abouafso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ void	*ft_calloc(size_t num_elements, size_t element_size)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int	i;
-	int	lenght;
+	int		i;
+	int		lenght;
 	char	*new;
-	int	j;
+	int		j;
 
 	if (!s1 || !s2)
 		return (NULL);

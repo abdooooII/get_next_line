@@ -6,7 +6,7 @@
 /*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 23:26:14 by abouafso          #+#    #+#             */
-/*   Updated: 2023/12/29 01:04:48 by abouafso         ###   ########.fr       */
+/*   Updated: 2023/12/29 03:39:30 by abouafso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ char	*copy_line(char *buffer)
 		i++;
 	}
 	if (buffer[i] && buffer[i] == '\n')
-	{
-		line[i] = '\n';
-		i++;
-	}
+		line[i++] = '\n';
 	return (line);
 }
 
@@ -105,16 +102,17 @@ char	*remove_first_line(char *buffer)
 	return (new_buff);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static char	*buffer[OPEN_MAX];
 	char		*line;
+
 	if (BUFFER_SIZE <= 0 || fd < 0 || fd > OPEN_MAX)
-		return(NULL);
+		return (NULL);
 	buffer[fd] = read_file(fd, buffer[fd]);
 	if (!buffer[fd])
 		return (NULL);
 	line = copy_line(buffer[fd]);
-	buffer[fd] =  remove_first_line(buffer[fd]);
-	return(line);
+	buffer[fd] = remove_first_line(buffer[fd]);
+	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 01:26:13 by abouafso          #+#    #+#             */
-/*   Updated: 2023/12/28 06:37:33 by abouafso         ###   ########.fr       */
+/*   Updated: 2023/12/29 03:38:49 by abouafso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_BONUS_H
 
 # include <stdlib.h>
-#include <fcntl.h>
+# include <fcntl.h>
 # include <unistd.h>
 # include <limits.h>
 # include <stddef.h>
@@ -31,6 +31,6 @@ char	*ft_join_and_free(char *buffer, char *buf);
 char	*read_file(int fd, char *result);
 char	*copy_line(char *buffer);
 char	*remove_first_line(char *buffer);
-char 	*get_next_line(int fd);
+char	*get_next_line(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 01:26:16 by abouafso          #+#    #+#             */
-/*   Updated: 2023/12/28 06:40:16 by abouafso         ###   ########.fr       */
+/*   Updated: 2023/12/29 03:37:56 by abouafso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ char	*copy_line(char *buffer)
 		i++;
 	}
 	if (buffer[i] && buffer[i] == '\n')
-	{
-		line[i] = '\n';
-		i++;
-	}
+		line[i++] = '\n';
 	return (line);
 }
 
@@ -105,19 +102,21 @@ char	*remove_first_line(char *buffer)
 	return (new_buff);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static char	*buffer;
 	char		*line;
+
 	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) == -1)
-		return(free(buffer), NULL);
+		return (free(buffer), NULL);
 	buffer = read_file(fd, buffer);
 	if (!buffer)
 		return (NULL);
 	line = copy_line(buffer);
-	buffer =  remove_first_line(buffer);
-	return(line);
+	buffer = remove_first_line(buffer);
+	return (line);
 }
+
 // #include <stdio.h>
 
 // int main(void)
@@ -134,9 +133,13 @@ char *get_next_line(int fd)
 
 // int main(void)
 // {
-// 	int fd = open("test.txt", O_RDONLY);  // Ouvrir le fichier en mode lecture seule
-// 	char *str = get_next_line(fd);  // Obtenir la prochaine ligne du fichier
-// 	printf("%s", str);  // Imprimer la ligne
-// 	free(str);  // Libérer la mémoire allouée pour la ligne
+// 	int fd = open("test.txt", O_RDONLY);
+			// Ouvrir le fichier en mode lecture seule
+// 	// char *str = get_next_line(fd);
+			// Obtenir la prochaine ligne du fichier
+// 	// printf("%s", str);  
+			// Imprimer la ligne
+// 	// free(str);
+			// Libérer la mémoire allouée pour la ligne
 // 	return (0);
 // }
