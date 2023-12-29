@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/23 01:26:16 by abouafso          #+#    #+#             */
-/*   Updated: 2023/12/28 06:40:16 by abouafso         ###   ########.fr       */
+/*   Created: 2023/12/26 23:26:14 by abouafso          #+#    #+#             */
+/*   Updated: 2023/12/29 01:04:48 by abouafso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_join_and_free(char *buffer, char *buf)
 {
@@ -107,36 +107,14 @@ char	*remove_first_line(char *buffer)
 
 char *get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[OPEN_MAX];
 	char		*line;
-	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) == -1)
-		return(free(buffer), NULL);
-	buffer = read_file(fd, buffer);
-	if (!buffer)
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd > OPEN_MAX)
+		return(NULL);
+	buffer[fd] = read_file(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line = copy_line(buffer);
-	buffer =  remove_first_line(buffer);
+	line = copy_line(buffer[fd]);
+	buffer[fd] =  remove_first_line(buffer[fd]);
 	return(line);
 }
-// #include <stdio.h>
-
-// int main(void)
-// {
-// 	int fd = open("massari.txt", O_RDONLY);
-// 	char *str = get_next_line(fd);
-// 	while (str)
-// 	{
-// 		printf("%s", str);
-// 		free(str);
-// 		str = get_next_line(fd);
-// 	}
-// }
-
-// int main(void)
-// {
-// 	int fd = open("test.txt", O_RDONLY);  // Ouvrir le fichier en mode lecture seule
-// 	char *str = get_next_line(fd);  // Obtenir la prochaine ligne du fichier
-// 	printf("%s", str);  // Imprimer la ligne
-// 	free(str);  // Libérer la mémoire allouée pour la ligne
-// 	return (0);
-// }
