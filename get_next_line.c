@@ -6,7 +6,7 @@
 /*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 01:26:16 by abouafso          #+#    #+#             */
-/*   Updated: 2024/01/02 20:50:07 by abouafso         ###   ########.fr       */
+/*   Updated: 2024/01/03 22:21:11 by abouafso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,54 +115,4 @@ char	*get_next_line(int fd)
 	line = copy_line(buffer);
 	buffer = remove_first_line(buffer);
 	return (line);
-}
-
-// #include <stdio.h>
-
-// int main(void)
-// {
-// 	int fd = open("massari.txt", O_RDONLY);
-// 	char *str = get_next_line(fd);
-// 	while (str)
-// 	{
-// 		printf("%s", str);
-// 		free(str);
-// 		str = get_next_line(fd);
-// 	}
-// }
-
-// int main(void)
-// {
-// 	int fd = open("test.txt", O_RDONLY);
-			// Ouvrir le fichier en mode lecture seule
-// 	// char *str = get_next_line(fd);
-			// Obtenir la prochaine ligne du fichier
-// 	// printf("%s", str);  
-			// Imprimer la ligne
-// 	// free(str);
-			// Libérer la mémoire allouée pour la ligne
-// 	return (0);
-// }
-#include <fcntl.h>
-#include <stdio.h>
-
-int main(void)
-{
-    int fd;
-    char *line;
-
-    fd = open("test.txt", O_RDONLY); // Replace "example.txt" with the path to your file
-
-    if (fd == -1)
-    {
-        perror("Error opening file");
-        return 1;
-    }
-
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("Line: %s", line);
-        free(line);
-    }
-    return 0;
 }
