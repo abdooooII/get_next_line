@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abouafso <abouafso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mkimdil <mkimdil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 23:26:14 by abouafso          #+#    #+#             */
-/*   Updated: 2024/01/03 22:36:25 by abouafso         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:44:45 by mkimdil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ char	*read_file(int fd, char *result)
 	line = 1;
 	if (!result)
 		result = ft_calloc(1, 1);
+	if (!result)
+		return (NULL);
 	buffer = malloc((size_t)BUFFER_SIZE + 1);
-	if (!result || !buffer)
-		return (free(result), free (buffer), NULL);
+	if (!buffer)
+		return (free(result), NULL);
 	while (line)
 	{
 		line = read(fd, buffer, BUFFER_SIZE);
@@ -42,8 +44,7 @@ char	*read_file(int fd, char *result)
 		if (ft_strrchr(buffer, '\n'))
 			break ;
 	}
-	free(buffer);
-	return (result);
+	return (free(buffer), result);
 }
 
 char	*copy_line(char *buffer)
@@ -62,14 +63,8 @@ char	*copy_line(char *buffer)
 	if (!line)
 		return (free(buffer), NULL);
 	line[i] = '\0';
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-	{
+	while (--i >= 0)
 		line[i] = buffer[i];
-		i++;
-	}
-	if (buffer[i] && buffer[i] == '\n')
-		line[i++] = '\n';
 	return (line);
 }
 
@@ -84,22 +79,13 @@ char	*remove_first_line(char *buffer)
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (!buffer[i])
-	{
-		free (buffer);
-		return (NULL);
-	}
+		return (free(buffer), NULL);
 	new_buff = ft_calloc((ft_strlen(buffer) - i + 1), 1);
 	if (!new_buff)
 		return (free(buffer), NULL);
-	i++;
-	while (buffer[i])
-	{
-		new_buff[j] = buffer[i];
-		j++;
-		i++;
-	}
-	free (buffer);
-	return (new_buff);
+	while (buffer[++i])
+		new_buff[j++] = buffer[i];
+	return (free(buffer), new_buff);
 }
 
 char	*get_next_line(int fd)
